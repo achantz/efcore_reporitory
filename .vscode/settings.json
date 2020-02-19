@@ -1,0 +1,5 @@
+{
+  "git.enabled": true,
+  "csharp.referencesCodeLens.enabled": false,
+  "csharp.testsCodeLens.enabled": false
+}
