@@ -47,6 +47,8 @@ namespace api.DB
             );
 
             builder.Entity<Account>().HasKey(p => p.Id);
+
+            base.OnModelCreating(builder);
         }
     }
 }

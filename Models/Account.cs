@@ -7,7 +7,9 @@ namespace api.Models
     [Table("account")]
     public class Account
     {
-        public int Id { get; set; }
+        [Key]
+        [Column("AccountID")]
+        public long Id { get; set; }
 
         [Required(ErrorMessage = "Date created is required")]
         public DateTime DateCreated { get; set; }
@@ -16,7 +18,7 @@ namespace api.Models
         public string AccountType { get; set; }
 
         [ForeignKey(nameof(Owner))]
-        public int OwnerId { get; set; }
+        public long OwnerId { get; set; }
         public Owner Owner { get; set; }
     }
 }

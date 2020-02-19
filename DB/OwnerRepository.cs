@@ -1,3 +1,4 @@
+using System.Text;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,11 @@ namespace api.DB
             CreateOwner(owner);
         }
 
+        public void DeleteOwner(Owner owner)
+        {
+            Delete(owner);
+        }
+
         public IEnumerable<Owner> GetAllOwners()
         {
             return FindAll()
@@ -27,12 +33,12 @@ namespace api.DB
             .ToList();
         }
 
-        public Owner GetOwnerById(int ownerId)
+        public Owner GetOwnerById(long ownerId)
         {
             return FindByCondition(owner => owner.Id.Equals(ownerId)).FirstOrDefault();
         }
 
-        public Owner GetOwnerWithDetails(int ownerId)
+        public Owner GetOwnerWithDetails(long ownerId)
         {
             return FindByCondition(owner => owner.Id.Equals(ownerId))
             .Include(ac => ac.Accounts)
@@ -41,7 +47,7 @@ namespace api.DB
 
         public void UpdateOwner(Owner owner)
         {
-            UpdateOwner(owner);
+            Update(owner);
         }
     }
 }

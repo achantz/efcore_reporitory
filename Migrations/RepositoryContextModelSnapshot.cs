@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using api.DB;
 
-namespace api.Migrations.SqliteMigrations
+namespace api.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
     partial class RepositoryContextModelSnapshot : ModelSnapshot
@@ -18,15 +18,16 @@ namespace api.Migrations.SqliteMigrations
 
             modelBuilder.Entity("api.Models.Account", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("AccountID");
 
                     b.Property<string>("AccountType")
                         .IsRequired();
 
                     b.Property<DateTime>("DateCreated");
 
-                    b.Property<int>("OwnerId");
+                    b.Property<long>("OwnerId");
 
                     b.HasKey("Id");
 
@@ -37,8 +38,9 @@ namespace api.Migrations.SqliteMigrations
 
             modelBuilder.Entity("api.Models.Owner", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("OwnerID");
 
                     b.Property<string>("Address")
                         .IsRequired()
@@ -52,12 +54,12 @@ namespace api.Migrations.SqliteMigrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Owner");
+                    b.ToTable("owner");
 
                     b.HasData(
-                        new { Id = 1, Address = "23 KillYou Street", DateOfBirth = new DateTime(1982, 12, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), Name = "Steven Segal" },
-                        new { Id = 2, Address = "45 Funny Street", DateOfBirth = new DateTime(1979, 3, 13, 0, 0, 0, 0, DateTimeKind.Unspecified), Name = "Joe Dirt" },
-                        new { Id = 3, Address = "56 Pickadilly Street", DateOfBirth = new DateTime(1946, 6, 24, 0, 0, 0, 0, DateTimeKind.Unspecified), Name = "John Cleese" }
+                        new { Id = 1L, Address = "23 KillYou Street", DateOfBirth = new DateTime(1982, 12, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), Name = "Steven Segal" },
+                        new { Id = 2L, Address = "45 Funny Street", DateOfBirth = new DateTime(1979, 3, 13, 0, 0, 0, 0, DateTimeKind.Unspecified), Name = "Joe Dirt" },
+                        new { Id = 3L, Address = "56 Pickadilly Street", DateOfBirth = new DateTime(1946, 6, 24, 0, 0, 0, 0, DateTimeKind.Unspecified), Name = "John Cleese" }
                     );
                 });
 

@@ -37,7 +37,7 @@ namespace api.Controllers
         }
 
         [HttpGet("{id}", Name = "OwnerById")]
-        public IActionResult GetOwnerById(int id)
+        public IActionResult GetOwnerById(long id)
         {
             try
             {
@@ -60,7 +60,7 @@ namespace api.Controllers
         }
 
         [HttpGet("{id}/account")]
-        public IActionResult GetOwnerWithDetails(int id)
+        public IActionResult GetOwnerWithDetails(long id)
         {
             try
             {
@@ -113,7 +113,7 @@ namespace api.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult UpdateOwner(int id, [FromBody]OwnerForUpdateDAO owner)
+        public IActionResult UpdateOwner(long id, [FromBody]OwnerForUpdateDAO owner)
         {
             try
             {
@@ -137,6 +137,28 @@ namespace api.Controllers
                 _mapper.Map(owner, ownerEntity);
 
                 _repository.Owner.UpdateOwner(ownerEntity);
+                _repository.Save();
+
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, ex.Message);
+            }
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult DeleteOwner(long id)
+        {
+            try
+            {
+                var owner = _repository.Owner.GetOwnerById(id);
+                if (owner == null)
+                {
+                    return NotFound();
+                }
+
+                _repository.Owner.DeleteOwner(owner);
                 _repository.Save();
 
                 return NoContent();

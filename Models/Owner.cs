@@ -8,7 +8,9 @@ namespace api.Models
     [Table("owner")]
     public class Owner
     {
-        public int Id { get; set; }
+        [Key]
+        [Column("OwnerID")]
+        public long Id { get; set; }
 
         [Required(ErrorMessage = "Name is required.")]
         [StringLength(60, ErrorMessage = "Name cannot be longer than 60 characters")]
